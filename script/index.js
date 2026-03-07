@@ -3,6 +3,7 @@ const issueContainer = document.getElementById("issuesContainer")
 //console.log(issueContainer)
 const totalIssues = document.getElementById("totalCount")
 
+
 window.addEventListener('popstate', function(event){
 
 })
@@ -15,7 +16,7 @@ async function loadIssues(){
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     const data = await res.json();
     displayIssues(data.data);
-    console.log(data.data);
+    //console.log(data.data);
 }
 loadIssues()
 
@@ -37,6 +38,8 @@ loadIssues()
 
 
 function displayIssues(issues){
+    manageSpinner(true)
+    issuesContainer.innerHTML = "";
     issues.forEach(issue => {
         totalIssues.innerText = issues.length;
        
@@ -46,7 +49,8 @@ function displayIssues(issues){
             : "border-[#A855F7]"
         } px-4 py-4 rounded-[8px] space-y-4 `;
         issueCard.innerHTML = `
-            <div  class="flex justify-between items-center onclick = "openIssueDetails(${issue.id})"">
+        <div onclick = "loadIssueDetail(${issue.id})" class = "space-y-3">
+            <div onclick = "loadIssueDetail(${issue.id})" class="flex justify-between items-center >
                 <img src="./assets/Open-Status.png" alt="" srcset="">
                 <div class="badge badge-md  font-semibold px-6 
                     ${issue.priority === 'low' ? 'bg-[#EEEFF2] text-[#9CA3AF]'  : 
@@ -57,7 +61,7 @@ function displayIssues(issues){
             </div>
             <div class="space-y-4">
                 <h3 class="font-bold">${issue.title}</h3>
-                <p class="line-clamp-2">${issue.description}</p>
+                <p class="line-clamp-2 mt-3">${issue.description}</p>
             </div>
             <div class="flex justify-center items-center">
                 
@@ -70,10 +74,23 @@ function displayIssues(issues){
                 <p>#1by ${issue.author}</p>
                 <p>${issue.createdAt}</p>
             </div>
-            <`;
+        </div>
+            `;
             issueContainer.appendChild(issueCard)
 
     });
+    manageSpinner(false);
+};
+
+
+
+
+const loadIssueDetail = async(id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+   // console.log(url)
+   const res = await fetch(url);
+   const details = await res.json();
+   displayIsuueDetails(details.data)
 }
 
 // {
@@ -91,18 +108,95 @@ function displayIssues(issues){
 // "updatedAt": "2024-02-02T10:00:00Z"
 // }
 
-const modalTeitel = document.getElementById("modal-teitel")
-console.log(modalTeitel)
-const issueModal = document.getElementById("issueModal")
+const displayIsuueDetails = (issue) => {
+    //console.log(issue)
+    const detailsBox = document.getElementById("details-container")
+    detailsBox.innerHTML =`
 
-async function  openIssueDetails(issueId) {
-    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`);
-    const data = await res.json();
-    //console.log(data.data)
-    //const issueDetails = data.data;
-    modalTeitel = data.title;
-    console.log(modalTeitel)
-    issueModal.showModal();
 
+                <div class="space-y-4">
+                    <h3 id="modal-teitel" class="font-bold text-2xl">Fix broken image uploads</h3>
+                    <div class="flex justify-between items-center gap-2 ">
+                    <div id="modal-status" class=" gap-1 badge badge-md bg-[#00A96E] text-white">Opened</div>
+                        <ul class="flex gap-2">
+                            <li id="issue-author">Opened by Fahim Ahmed</li>
+                            <li id="issue-date">22/02/2026</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class ="mt-3">
+                     <div id="badge-bug" class=" badge badge-md bg-[#FEECEC]"><img src="./assets/BugDroid.png" alt="" srcset="">BUG</div>
+                      <div id="badge-help" class=" badge badge-md bg-[#FEECEC]"><img src="./assets/Lifebuoy.png" alt="" srcset="">HELP WANTED</div>
+                </div>
+                <p id="issue-description" class ="mt-3">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+                <div class="flex justify-between  flex-l mt-6 bg-[#F8FAFC] px-4 py-4">
+                <div>
+                    <p>Assignee</p>
+                    <p id="assign-author">Fahim Ahmed</p>
+
+                </div>
+                <div class="flex flex-col justify-start">
+                    <p>Priority</p>
+                    <div id="issue-priority" class=" badge badge-md bg-[#EF4444] text-white">HIGH</div>
+                </div>
+                </div>
+                `;
+                document.getElementById('issueModal').showModal();
 }
-openIssueDetails()
+
+// function for spinner
+const manageSpinner = (status) =>{
+    if(status == true){
+        document.getElementById("spinner").classList.remove("hidden")
+        document.getElementById("issuesContainer").classList.add("hidden")
+    }else{
+        document.getElementById("spinner").classList.add("hidden")
+        document.getElementById("issuesContainer").classList.remove("hidden")
+    }
+}
+
+//function search
+
+// document.getElementById("btn-search").addEventListener('click', function(){
+    
+//     const input = document.getElementById("input-search");
+//     const searchValue = input.value.trim().toLowerCase();
+//     console.log(searchValue)
+
+//     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+//     .then(res => res.json())
+//     .then(data => {
+//         const allWords = data.data;
+//         console.log(allWords)
+//         const filterWords = allWords.filter(word => 
+//             word.word.toLowerCase().includes(searchValue)
+//         );
+//          displayIssues(filterWords)
+
+//     })
+// });
+
+document.getElementById("btn-search").addEventListener('click', function() {
+    const input = document.getElementById("input-search");
+    const searchValue = input.value.trim().toLowerCase();
+    
+    manageSpinner(true); // Start spinner immediately
+
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+    .then(res => res.json())
+    .then(data => {
+        const allIssues = data.data;
+        
+        // Ensure you are filtering by the correct property (title)
+        const filterWords = allIssues.filter(issue => 
+            
+            issue.title.toLowerCase().includes(searchValue)
+        );
+
+        displayIssues(filterWords);
+    })
+    .catch(err => {
+        console.error("Search Error:", err);
+        manageSpinner(false);
+    });
+});
