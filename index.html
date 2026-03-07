@@ -14,14 +14,119 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <style>
-        *{
-            font-family: "Geist", sans-serif;
-        }
-    </style>
+    <!-- CSS Style Link -->
+    <link rel="stylesheet" href="./style/styles.css">
 </head>
 <body>
-    <h1 class="bg-green-500">Hallo index</h1>
+    <!-- Navbar -->
+   <section class="">
+    <header class=" ">
+        <div class="px-20 py-4 mx-auto flex justify-between navbar bg-base-100 shadow-sm">
+            <div class="flex justify-center items-center gap-1">
+                <img class="w-[36px] h-[37px]" src="./assets/github-logo.png" alt="" srcset="">
+                <p>GitHub Issues Tracker</p>
+            </div>
+        
+            <div class="flex">
+                <label class="input validator join-item">
+                <input id="searchText" type="text" placeholder="Search issues" required />
+                
+                </label>
+                <button id="searchBtn" class="btn btn-primary text-white join-item">+ New Issue</button>
+            </div>
+
+                
+        </div>
+            
+    </header>
+   </section>
+
+   <!-- Menu section -->
+    <section class="mx-auto mt-10 mb-4 max-w-[1110px] px-4 py-4 bg-white shadow-md">
+        <div class=" text-[#64748B]">
+            <button class="btn text-[#64748B] font-medium">All</button>
+            <button class="btn text-[#64748B] font-medium">Open</button>
+            <button class="btn text-[#64748B] font-medium">Closed</button>
+        </div>
+    </section>
+
+    <!-- main -->
+     <section>
+        <div class="flex justify-between items-center max-w-[1110px] mx-auto shadow-md px-4 py-4">
+            <div class="flex items-center gap-2">
+                <div class=" px-2 py-2  w-10 h-10 rounded-full bg-[#ECE4FF]">
+                    <img   src="./assets/Aperture.png" alt="" srcset="">
+                </div>
+                <div>
+                    <h4 id="totalCount" class="font-bold">0 Issues</h4>
+                    <p>Track and manage your project issues</p>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <div class="flex gap-1 justify-center items-center">
+                    <div class="w-3 h-3 rounded-full bg-[#00A96E]"></div>
+                    <p> Open</p>
+                </div>
+                <div class="flex gap-1 justify-center items-center">
+                    <div class="w-3 h-3 rounded-full bg-[#A855F7]"></div>
+                    <p>Closed</p>
+                </div>
+                
+            </div>
+            
+
+        </div>
+
+
+     </section>
+
+    <!-- Dynamic Card Section -->
+     <section id="issuesContainer" class="max-w-[1110px] mx-auto px-4 py-4 bg-[#FBFBFB] grid grid-cols-4 gap-2">
+        <!-- cards -->
+        </section>
+
+        <!-- Modal -->
+         <!-- <section id="issue-details-modal">
+            Open the modal using ID.showModal() method 
+            <button class="btn" onclick="issueModal.showModal()">open modal</button> -->
+            <dialog id="issueModal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box space-y-4">
+                
+                <div class="space-y-4">
+                    <h3 id="modal-teitel" class="font-bold text-2xl">Fix broken image uploads</h3>
+                    <div class="flex justify-between items-center gap-2 ">
+                    <div id="modal-status" class=" gap-1 badge badge-md bg-[#00A96E] text-white">Opened</div>
+                        <ul class="flex gap-2">
+                            <li id="issue-author">Opened by Fahim Ahmed</li>
+                            <li id="issue-date">22/02/2026</li>
+                        </ul>
+                        </div>
+                </div>
+                <div>
+                     <div id="badge-bug" class=" badge badge-md bg-[#FEECEC]"><img src="./assets/BugDroid.png" alt="" srcset="">BUG</div>
+                      <div id="badge-help" class=" badge badge-md bg-[#FEECEC]"><img src="./assets/Lifebuoy.png" alt="" srcset="">HELP WANTED</div>
+                </div>
+                <p id="issue-description">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+                <div class="flex justify-between  flex-l mt-6 bg-[#F8FAFC] px-4 py-4">
+                <div>
+                    <p>Assignee</p>
+                    <p id="assign-author">Fahim Ahmed</p>
+
+                </div>
+                <div class="flex flex-col justify-start">
+                    <p>Priority</p>
+                    <div id="issue-priority" class=" badge badge-md bg-[#EF4444] text-white">HIGH</div>
+                </div>
+                </div>
+                <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+                </div>
+            </div>
+            </dialog>
+         <!-- </section> -->
 
     <script src="./script/index.js"></script>
 </body>

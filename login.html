@@ -14,14 +14,48 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <style>
-        *{
-            font-family: "Geist", sans-serif;
-        }
-    </style>
+    <!-- CSS Style Link -->
+    <link rel="stylesheet" href="./style/styles.css">
 </head>
 <body>
-    <h1 class="bg-green-500">Hallo login</h1>
+    <section id="loginContainer" class="max-w-[1600px] mx-auto px-[245px] py-[60px]">
+        <div id="loginForm" class="max-w-[532px] mx-auto px-8 py-8 bg-white shadow-md">
+            <div class="flex justify-center items-center flex-col mb-6">
+                <p class="mb-6">
+                    <img src="./assets/github-logo.png" alt="" srcset="">
+                </p>
+                <h3 class="font-semibold mb-1">GitHub Issues Tracker</h3>
+                <p class="text-[#64748B]">Sign in to manage your issues</p>
+            </div>
+            <div class="flex justify-center  mx-auto">
+                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-11/12 border p-4">
+                    
+
+                    <label class="label">Username</label>
+                    <input id="inputeUserName" type="text" class="input" placeholder=" Enter username" />
+                    <label class="fieldset-legend text-[#4A00FF]">Default: admin</label>
+
+                    <label class="label">Password</label>
+                    <input id="inputUserPassword" type="password" class="input" placeholder="Enter password" />
+                    <label class="fieldset-legend text-[#4A00FF]">Default: admin123</label>
+
+                    <button id="btnLogin" class="btn btn-primary mt-4">Sign In</button>
+                </fieldset>
+            </div>
+           
+            <div class=" divider divider-base-300 my-6 max-w-[380px] mx-auto text-[#1F2937]">OR</div>
+
+            <div class="text-center w-11/12 mx-auto ">
+                <p class="text-[#64748B]">Demo Credentials:</p>
+                <div class="mt-2 px-6 py-6 bg-base-200 rounded-[8px] text-[#1F2937]">
+                    <p><span class="font-semibold">Username:</span> admin</p>
+                    <p><span class="font-semibold">Password:</span> admin123</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
 
     <script src="./script/login.js"></script>
 </body>
