@@ -48,7 +48,7 @@ function displayIssues(issues){
         totalIssues.innerText = issues.length;
        
         const issueCard = document.createElement("div");
-        issueCard.className =`max-w-[256px] shadow-md border-t-3 ${issue.status == "open"
+        issueCard.className =`max-w-[600px]  shadow-md border-t-3 ${issue.status == "open"
             ?"border-[#00A96E]" 
             : "border-[#A855F7]"
         } px-4 py-4 rounded-[8px] space-y-4 `;
@@ -114,6 +114,7 @@ const loadIssueDetail = async(id) => {
 
 const displayIsuueDetails = (issue) => {
     //console.log(issue)
+     manageSpinner(true);
     const detailsBox = document.getElementById("details-container")
     detailsBox.innerHTML =`
 
@@ -121,7 +122,15 @@ const displayIsuueDetails = (issue) => {
                 <div class="space-y-4">
                     <h3 id="modal-teitel" class="font-bold text-2xl">${issue.title}</h3>
                     <div class="flex justify-between items-center gap-2 ">
-                    <div id="modal-status" class=" gap-1 badge badge-md bg-[#00A96E] text-white">${issue.status}</div>
+                    <div id="modal-status" class=" gap-1 badge badge-md 
+                    
+                        ${issue.status === 'open' ? 'bg-[#00A96E] text-white'  : 
+                        issue.status === 'closed' ? 'bg-[#A855F7] text-white' : 
+                        'bg-ghost'
+                    }
+                    
+                    
+                    ">${issue.status}</div>
                         <ul class="flex gap-2">
                             <li id="issue-author">${issue.author}</li>
                             <li id="issue-date">${issue.createdAt}</li>
@@ -154,6 +163,7 @@ const displayIsuueDetails = (issue) => {
                 </div>
                 `;
                 document.getElementById('issueModal').showModal();
+                manageSpinner(false);
 }
 
 // function for spinner
@@ -170,6 +180,7 @@ const manageSpinner = (status) =>{
 //function search
 
 document.getElementById("btn-search").addEventListener('click', function() {
+
     const input = document.getElementById("input-search");
     const searchValue = input.value.trim().toLowerCase();
     
@@ -187,7 +198,7 @@ document.getElementById("btn-search").addEventListener('click', function() {
         );
 
         displayIssues(filterWords);
-        btn.classList.remove("btn-primary");
+        
     })
     .catch(err => {
         console.error("Search Error:", err);
@@ -244,3 +255,15 @@ closedBtn.addEventListener('click', () =>{
     });
 });
 
+const btnSearch = document.getElementById("btn-search")
+const allBtn = document.getElementById("allBtn")
+btnSearch.addEventListener('click',()=>{
+    allBtn.classList.remove("btn-primary");
+    openBtn.classList.remove("btn-primary");
+    closedBtn.classList.remove("btn-primary");
+
+    allBtn.classList.add( 'text-[#64748B]');
+    openBtn.classList.add( 'text-white-500');
+    closedBtn.classList.add( 'text-white-500');
+    console.log(allBtn)
+})
