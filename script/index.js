@@ -3,11 +3,10 @@ const issueContainer = document.getElementById("issuesContainer")
 //console.log(issueContainer)
 const totalIssues = document.getElementById("totalCount")
 
-
+const allIssueBtns = document.getElementById("btnContainer")
 window.addEventListener('popstate', function(event){
 
 })
-
 
 
 
@@ -19,6 +18,11 @@ async function loadIssues(){
     //console.log(data.data);
 }
 loadIssues()
+
+
+
+
+
 
 // {
 // "id": 1,
@@ -157,25 +161,6 @@ const manageSpinner = (status) =>{
 
 //function search
 
-// document.getElementById("btn-search").addEventListener('click', function(){
-    
-//     const input = document.getElementById("input-search");
-//     const searchValue = input.value.trim().toLowerCase();
-//     console.log(searchValue)
-
-//     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
-//     .then(res => res.json())
-//     .then(data => {
-//         const allWords = data.data;
-//         console.log(allWords)
-//         const filterWords = allWords.filter(word => 
-//             word.word.toLowerCase().includes(searchValue)
-//         );
-//          displayIssues(filterWords)
-
-//     })
-// });
-
 document.getElementById("btn-search").addEventListener('click', function() {
     const input = document.getElementById("input-search");
     const searchValue = input.value.trim().toLowerCase();
@@ -194,9 +179,60 @@ document.getElementById("btn-search").addEventListener('click', function() {
         );
 
         displayIssues(filterWords);
+        btn.classList.remove("btn-primary");
     })
     .catch(err => {
         console.error("Search Error:", err);
         manageSpinner(false);
     });
 });
+
+
+
+// toggel between buttons*****
+const container = document.getElementById('btnContainer');
+const buttons = container.querySelectorAll('button');
+
+container.addEventListener('click', (e) => {
+    const clickedBtn = e.target.closest('button');
+    if (!clickedBtn) return;
+
+    // 1. Reset all buttons to the "unselected" state
+    buttons.forEach(btn => {
+        btn.classList.remove('btn-primary', 'text-white');
+        btn.classList.add('bg-transparent', 'text-[#64748B]');
+    });
+
+    // 2. Apply "selected" state to the clicked button
+    clickedBtn.classList.remove('bg-transparent', 'text-[#64748B]');
+    clickedBtn.classList.add('btn-primary', 'text-white');
+    loadIssues()
+});
+
+const openBtn = document.getElementById('openBtn')
+const closedBtn = document.getElementById('closedBtn')
+
+openBtn.addEventListener('click', () =>{
+    manageSpinner(true);
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/`)
+    .then(res => res.json())
+    .then(data => {
+        const alldata = data.data
+        const openIssues = alldata.filter(issue => issue.status === "open");
+        
+        displayIssues(openIssues);
+    });
+});
+
+closedBtn.addEventListener('click', () =>{
+    manageSpinner(true);
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/`)
+    .then(res => res.json())
+    .then(data => {
+        const alldata = data.data
+        const closedIssues = alldata.filter(issue => issue.status === "closed");
+        
+        displayIssues(closedIssues);
+    });
+});
+
