@@ -119,12 +119,12 @@ const displayIsuueDetails = (issue) => {
 
 
                 <div class="space-y-4">
-                    <h3 id="modal-teitel" class="font-bold text-2xl">Fix broken image uploads</h3>
+                    <h3 id="modal-teitel" class="font-bold text-2xl">${issue.title}</h3>
                     <div class="flex justify-between items-center gap-2 ">
-                    <div id="modal-status" class=" gap-1 badge badge-md bg-[#00A96E] text-white">Opened</div>
+                    <div id="modal-status" class=" gap-1 badge badge-md bg-[#00A96E] text-white">${issue.status}</div>
                         <ul class="flex gap-2">
-                            <li id="issue-author">Opened by Fahim Ahmed</li>
-                            <li id="issue-date">22/02/2026</li>
+                            <li id="issue-author">${issue.author}</li>
+                            <li id="issue-date">${issue.createdAt}</li>
                         </ul>
                     </div>
                 </div>
@@ -132,16 +132,24 @@ const displayIsuueDetails = (issue) => {
                      <div id="badge-bug" class=" badge badge-md bg-[#FEECEC]"><img src="./assets/BugDroid.png" alt="" srcset="">BUG</div>
                       <div id="badge-help" class=" badge badge-md bg-[#FEECEC]"><img src="./assets/Lifebuoy.png" alt="" srcset="">HELP WANTED</div>
                 </div>
-                <p id="issue-description" class ="mt-3">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+                <p id="issue-description" class ="mt-3">${issue.description}</p>
                 <div class="flex justify-between  flex-l mt-6 bg-[#F8FAFC] px-4 py-4">
                 <div>
                     <p>Assignee</p>
-                    <p id="assign-author">Fahim Ahmed</p>
+                    <p id="assign-author">${issue.assignee}</p>
 
                 </div>
                 <div class="flex flex-col justify-start">
                     <p>Priority</p>
-                    <div id="issue-priority" class=" badge badge-md bg-[#EF4444] text-white">HIGH</div>
+                    <div id="issue-priority" class=" badge badge-md 
+                         ${issue.priority === 'low' ? 'bg-[#EEEFF2] text-[#9CA3AF]'  : 
+                    issue.priority === 'high' ? 'bg-[#FEECEC] text-[#EF4444]' : 
+                    issue.priority === 'medium' ? 'bg-[#FFF6D1] text-[#F59E0B]' : 'bg-ghost'
+                    }
+                    
+                    
+                    
+                    ">${issue.priority}</div>
                 </div>
                 </div>
                 `;
