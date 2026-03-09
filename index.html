@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Issue Tracker</title>
+    <title>Login</title>
 
     <!-- Font Family Geist -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,100 +18,45 @@
     <link rel="stylesheet" href="./style/styles.css">
 </head>
 <body>
-    <!-- Navbar -->
-   <section class="">
-    <header class=" ">
-        <div class="px-20 py-4 mx-auto flex justify-between  navbar bg-base-100 shadow-sm">
-            <div class="flex justify-center items-center gap-1">
-                <img class="w-[36px] h-[37px]" src="./assets/github-logo.png" alt="" srcset="">
-                <p>GitHub Issues Tracker</p>
+    <section id="loginContainer" class="max-w-[1600px] mx-auto py-2 px-5 mt-5  md:px-[245px] md:py-[30px]">
+        <div id="loginForm" class="max-w-[532px] mx-auto px-8 py-8 bg-white shadow-md">
+            <div class="flex justify-center items-center flex-col mb-6">
+                <p class="mb-6">
+                    <img src="./assets/github-logo.png" alt="" srcset="">
+                </p>
+                <h3 class="font-semibold mb-1">GitHub Issues Tracker</h3>
+                <p class="text-[#64748B]">Sign in to manage your issues</p>
             </div>
-        
-            <div class="flex">
-                <label class="input validator join-item">
-                <input id="input-search" type="text" placeholder="Search issues" required />
-                
-                </label>
-                <button id="btn-search" class="btn btn-primary text-white join-item">+ New Issue</button>
+            <div class="flex justify-center  mx-auto">
+                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-11/12 border p-4">
+                    
+
+                    <label class="label">Username</label>
+                    <input id="inputeUserName" type="text" class="input" placeholder=" Enter username" />
+                    <label class="fieldset-legend text-[#4A00FF]">Default: admin</label>
+
+                    <label class="label">Password</label>
+                    <input id="inputUserPassword" type="password" class="input" placeholder="Enter password" />
+                    <label class="fieldset-legend text-[#4A00FF]">Default: admin123</label>
+
+                    <button id="btnLogin" class="btn btn-primary mt-4">Sign In</button>
+                </fieldset>
+            </div>
+           
+            <div class=" divider divider-base-300 my-6 max-w-[380px] mx-auto text-[#1F2937]">OR</div>
+
+            <div class="text-center w-11/12 mx-auto ">
+                <p class="text-[#64748B]">Demo Credentials:</p>
+                <div class="mt-2 px-6 py-6 bg-base-200 rounded-[8px] text-[#1F2937]">
+                    <p><span class="font-semibold">Username:</span> admin</p>
+                    <p><span class="font-semibold">Password:</span> admin123</p>
+                </div>
             </div>
 
-                
         </div>
-            
-    </header>
-   </section>
 
-   <!-- Menu section -->
-    <section  class="mx-auto mt-10 mb-4 max-w-[1110px] px-4 py-4 bg-white shadow-md">
-        <div id="btnContainer" class=" text-[#64748B]">
-            <button id="allBtn" class="btn-primary btn text-white font-medium">All</button>
-            <button id="openBtn" class=" btn text-[#64748B] font-medium">Open</button>
-            <button id="closedBtn" class=" btn text-[#64748B] font-medium">Closed</button>
-        </div>
     </section>
 
-
-    <!-- main -->
-     <section>
-        <div class="flex justify-between items-center max-w-[1110px] mx-auto shadow-md px-4 py-4">
-            <div class="flex items-center gap-2">
-                <div class=" px-2 py-2  w-10 h-10 rounded-full bg-[#ECE4FF]">
-                    <img   src="./assets/Aperture.png" alt="" srcset="">
-                </div>
-                <div>
-                    <h4 id="totalCount" class="font-bold">0 Issues</h4>
-                    <p>Track and manage your project issues</p>
-                </div>
-            </div>
-            <div class="flex gap-2">
-                <div class="flex gap-1 justify-center items-center">
-                    <div class="w-3 h-3 rounded-full bg-[#00A96E]"></div>
-                    <p> Open</p>
-                </div>
-                <div class="flex gap-1 justify-center items-center">
-                    <div class="w-3 h-3 rounded-full bg-[#A855F7]"></div>
-                    <p>Closed</p>
-                </div>
-                
-            </div>
-            
-
-        </div>
-
-
-     </section>
-
-
-     <!-- Loding page -->
-     <section id="spinner" class="flex justify-center items-center py-10 ">
-      <span class="loading loading-bars loading-xl"></span>
-     </section>
-
-    <!-- Dynamic Card Section -->
-     <section id="issuesContainer" class="grid grid-cols-2  max-w-[1110px] mx-auto px-4 py-4 bg-[#FBFBFB] md:grid-cols-4 gap-2">
-        <!-- cards -->
-    </section>
-
-        <!-- Modal -->
-         
-
-    <dialog id="issueModal" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box space-y-4">
-                <div id="details-container">
-
-
-                </div>
-                
-                <div class="modal-action">
-                    <form method="dialog">
-                    <!-- if there is a button in form, it will close the modal -->
-                    <button class="btn">Close</button>
-                    </form>
-                </div>
-            </div>
-    </dialog>
-         
-
-    <script src="./script/index.js"></script>
+    <script src="./script/login.js"></script>
 </body>
 </html>

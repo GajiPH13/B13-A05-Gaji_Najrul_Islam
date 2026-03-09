@@ -15,7 +15,7 @@ loginBtn.addEventListener('click', function(){
 // function for user credentials
 function userCredential(userName, userPassword){
      if(userName.value == validUserName && userPassword.value == validUserPassword){
-        window.open("index.html" , "_blank");
+        window.open("main.html" , "_blank");
     }else{
         alert('incorect credentioa try again')
     }
