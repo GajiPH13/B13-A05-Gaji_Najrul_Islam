@@ -3,6 +3,12 @@ const issueContainer = document.getElementById("issuesContainer")
 //console.log(issueContainer)
 const totalIssues = document.getElementById("totalCount")
 
+const openBtn = document.getElementById('openBtn')
+const closedBtn = document.getElementById('closedBtn')
+
+const btnSearch = document.getElementById("btn-search")
+const allBtn = document.getElementById("allBtn")
+
 const allIssueBtns = document.getElementById("btnContainer")
 window.addEventListener('popstate', function(event){
 
@@ -87,7 +93,7 @@ function displayIssues(issues){
 };
 
 
-
+// Function for Modal or Toast Message
 
 const loadIssueDetail = async(id) => {
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
@@ -228,9 +234,8 @@ container.addEventListener('click', (e) => {
     loadIssues()
 });
 
-const openBtn = document.getElementById('openBtn')
-const closedBtn = document.getElementById('closedBtn')
 
+// filter the open issues
 openBtn.addEventListener('click', () =>{
     manageSpinner(true);
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/`)
@@ -242,7 +247,7 @@ openBtn.addEventListener('click', () =>{
         displayIssues(openIssues);
     });
 });
-
+// filter the closed issue
 closedBtn.addEventListener('click', () =>{
     manageSpinner(true);
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/`)
@@ -255,8 +260,8 @@ closedBtn.addEventListener('click', () =>{
     });
 });
 
-const btnSearch = document.getElementById("btn-search")
-const allBtn = document.getElementById("allBtn")
+// Remove the active btn when search btn is clicked
+
 btnSearch.addEventListener('click',()=>{
     allBtn.classList.remove("btn-primary");
     openBtn.classList.remove("btn-primary");
